@@ -27,11 +27,14 @@ class TareasController extends Controller
      */
     public function store(Request $request)
     {
+        $user_id = 1;
+        $estado = 0;
         $tarea = new Tarea;
+        $tarea->user_id = $user_id;
         $tarea->nombre = $request->nombre;
+        $tarea->estado = $estado;
         $tarea->save();
         return $tarea;
-        
     }
 
     /**
@@ -42,7 +45,8 @@ class TareasController extends Controller
      */
     public function show($id)
     {
-        //
+        $tarea = DB::table('tareas')->find($id);
+        return $tarea;
     }
 
     /**
@@ -54,7 +58,11 @@ class TareasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tarea = DB::table('tareas')->find($request->id);
+        $tarea->nombre = $request->nombre;
+        $tarea->estado = $request->estado;
+        $tarea->save();
+        return $tarea;
     }
 
     /**
@@ -65,8 +73,7 @@ class TareasController extends Controller
      */
     public function destroy($id)
     {
-        $tarea = DB::table('tareas')->find($id);
-        $tarea->delete();
+        $tarea = Tarea::destroy($id);
         return $tarea;
     }
 }

@@ -15,13 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
 
 
 Route::controller(TareasController::class)->group(function(){
-    Route::get('/tareas','index');
-    Route::get('/tarea/{id}', 'destroy');
-}
-);
+    Route::get('/tareas','index');//funciona
+    Route::get('/btarea/{id}','show');//funciona
+    Route::delete('/dtarea/{id}', 'destroy');
+    Route::post('/crear', 'store');//funciona
+    Route::put('/actualizar/{id}', 'update');
+});
